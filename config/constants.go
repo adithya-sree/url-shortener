@@ -1,7 +1,7 @@
 package config
 
 const (
-	ConfigPath = "/Users/exerdra/git/url-shortener/sample-config.json"
+	ConfigPath = "/path/to/sample-config.json"
 
 	ErrString = "error"
 
