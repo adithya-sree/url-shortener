@@ -11,15 +11,8 @@ type Config struct {
 }
 
 type App struct {
-	Admin       Admin  `json:"admin"`
 	Port        string `json:"port"`
 	ShortLength int    `json:"shortLength"`
-}
-
-type Admin struct {
-	Enabled  bool   `json:"enabled"`
-	Username string `json:"username"`
-	Password string `json:"password"`
 }
 
 type Redis struct {
