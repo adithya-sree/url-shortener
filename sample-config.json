@@ -1,0 +1,18 @@
+{
+	"redis" : {
+		"host" : "127.0.0.1:6379",
+		"password" : "",
+		"db" : 0,
+		"timeout" : 10000,
+		"ttl" : 86400
+	},
+	"app" : {
+		"admin" : {
+			"enabled" : true,
+			"username" : "admin",
+			"password" : "admin"
+		},
+		"port" : "8080",
+		"shortLength" : 5
+	}
+}
