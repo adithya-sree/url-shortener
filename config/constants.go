@@ -13,5 +13,6 @@ const (
 	Url     = "url"
 
 	HeaderUrl     = "x-shortener-url"
+	HeaderKey     = "x-shortener-key"
 	HeaderSession = "x-session-id"
 )

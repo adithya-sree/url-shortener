@@ -1,9 +1,7 @@
 package handler
 
 import (
-	"math/rand"
 	"net/http"
-	"time"
 
 	"github.com/adithya-sree/commons"
 	"github.com/adithya-sree/url-shortener/config"
@@ -17,10 +15,6 @@ const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 type CreatedRedirect struct {
 	ResourceUrl string `json:"resourceUrl"`
-}
-
-func init() {
-	rand.Seed(time.Now().UnixNano())
 }
 
 func (h *Handler) Redirect() http.HandlerFunc {
@@ -57,7 +51,7 @@ func (h *Handler) CreateRedirect() http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		session := r.Context().Value("session").(string)
 		h.Log.WithField(config.Session, session).Info("create redirect request")
-		short := RandStringBytes(h.Conf.App.ShortLength)
+		short := r.Context().Value("key").(string)
 		observable := rxgo.FromChannel(h.Redis.Set(short, r.Context().Value("url").(string)))
 		for result := range observable.Observe() {
 			if result.Error() {
@@ -74,12 +68,4 @@ func (h *Handler) CreateRedirect() http.HandlerFunc {
 			return
 		}
 	}
-}
-
-func RandStringBytes(n int) string {
-	b := make([]byte, n)
-	for i := range b {
-		b[i] = letterBytes[rand.Intn(len(letterBytes))]
-	}
-	return string(b)
 }

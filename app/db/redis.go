@@ -16,7 +16,7 @@ type RedisWrapper struct {
 	Conf  *config.Config
 }
 
-func (r *RedisWrapper) Get(key string) chan rxgo.Item {
+func (r *RedisWrapper) Get(key string) <-chan rxgo.Item {
 	ch := make(chan rxgo.Item, 1)
 
 	go func() {
@@ -41,7 +41,7 @@ func (r *RedisWrapper) Get(key string) chan rxgo.Item {
 	return ch
 }
 
-func (r *RedisWrapper) Set(key, val string) chan rxgo.Item {
+func (r *RedisWrapper) Set(key, val string) <-chan rxgo.Item {
 	ch := make(chan rxgo.Item, 1)
 
 	go func() {
